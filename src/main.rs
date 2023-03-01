@@ -27,6 +27,11 @@ fn main() {
         return;
     }
 
+    if args.len() > 1 && (args[1] == "--version" || args[1] == "-V") {
+        println!("Running version {}", version.to_owned());
+        return;
+    }
+
     println!("Running version {}", version.to_owned());
 
     // The rest of the program's code would go here.

@@ -29,7 +29,7 @@ pub async fn self_update(url: &String, binary_name: &String) -> io::Result<ExitS
   fs::write(&filename_new, &buf)?;
   
   Command::new("chmod").arg("+x").arg(&filename_new).status()?;
-  let status = Command::new(&filename_new).status()?;
+  let status = Command::new(&filename_new).arg("--version").status()?;
 
   if status.success() {
       println!("rewrite {} to {}", filename_new.display(), filename.display());
