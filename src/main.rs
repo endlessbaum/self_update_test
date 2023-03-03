@@ -1,3 +1,4 @@
+use dotenv::dotenv;
 use std::env;
 use futures::executor::block_on;
 use semver::{Version};
@@ -7,7 +8,9 @@ const VERSION: &'static str = env!("CARGO_PKG_VERSION");
 
 
 fn main() {
-    let base_url = &String::from("http://172.16.3.95:18888/self_update_test/x86_64"); 
+    dotenv().ok();
+    let base_url = env::var("TARGET_URL").expect("TARGET_URL must be set");
+    println!("{base_url}");
     let file_name = &String::from("self_update_test");
     let version_url = format!("{base_url}/version");
     let file_url = format!("{base_url}/{file_name}");
